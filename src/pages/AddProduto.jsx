@@ -1,14 +1,49 @@
 import { PhotoIcon } from '@heroicons/react/24/solid'
 import Header from '../components/Header'
+import { useProductStore } from '../components/globalStore'
 
 
 export default function AddProduto() {
+
+  const setNomeProduto = useProductStore(state => state.setNomeProduto);
+  const setDescricaoProduto = useProductStore(state => state.setDescricaoProduto);
+  const setProdutos = useProductStore(state => state.setProdutos);
+  
+  const nomeProduto = useProductStore(state => state.nomeProduto);
+  const descricaoProduto = useProductStore(state => state.descricaoProduto);
+  const produtos = useProductStore(state => state.produtos);
+
+  const handleNomeChange = (e) => {
+    setNomeProduto(e.target.value)
+  };
+
+  const handleDescricaoChange = (e) => {
+    setDescricaoProduto(e.target.value)
+  };
+
+  function handleProduto(e) {
+    e.preventDefault();
+    
+    const produto = {
+      id: produtos.length,
+      nome: nomeProduto,
+      descricao: descricaoProduto
+    };
+
+    setProdutos(produto);
+
+    setNomeProduto('');
+    setDescricaoProduto('');
+
+    console.log(produtos)
+  }
+
   return (
     <div>
 
     <Header />
 
-      <form>
+      <form onSubmit={handleProduto}>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
 
@@ -26,6 +61,7 @@ export default function AddProduto() {
                     autoComplete="productName"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 productNameText"
                     placeholder="janesmith"
+                    onChange={handleNomeChange}
                   />
                 </div>
               </div>
@@ -42,6 +78,7 @@ export default function AddProduto() {
                   rows={3}
                   className="productDescription block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   defaultValue={''}
+                  onChange={handleDescricaoChange}
                 />
               </div>
             </div>

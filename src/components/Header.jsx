@@ -12,7 +12,7 @@ const initialNavigation = [
 ]
 
 //TODO - consertar problema da cor do botao nao mudar com a pagina mudando no navigate
-//todo - fazer adicionar produto funcionar
+//todo - fazer adicionar produto funcionar - parcialmente funcionando, precisa revisar estados, etc...
 
 //TODO - Fazer as funções no App e descer elas pelos componentes
 //TODO - Fazer pagina de produtos, talvez criar um componente de card para os produtos
@@ -34,8 +34,8 @@ export default function Header() {
     return classes.filter(Boolean).join(' ')
   }
 
-
   return (
+
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
