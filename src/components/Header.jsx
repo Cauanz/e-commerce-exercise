@@ -1,5 +1,5 @@
 
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, NavLink } from 'react-router-dom'
@@ -11,24 +11,22 @@ const initialNavigation = [
   { name: 'Adicionar Produto', href: '/Adicionar-Produto', current: false },
 ]
 
-//TODO - consertar problema da cor do botao nao mudar com a pagina mudando no navigate
 //todo - fazer adicionar produto funcionar - parcialmente funcionando, precisa revisar estados, etc...
 
-//TODO - Fazer as funções no App e descer elas pelos componentes
 //TODO - Fazer pagina de produtos, talvez criar um componente de card para os produtos
 
 export default function Header() {
 
   const [navigation, setNavigation] = useState(initialNavigation);
 
-  const handleClick = (name) => {
-    setNavigation(
-      navigation.map((item) =>
-        item.name === name ? { ...item, current: true } : { ...item, current: false }
-      )
-    );
-    console.log(navigation)
-  };
+  useEffect(() => {
+      setNavigation(
+        navigation.map((item) =>
+          item.href === location.pathname ? { ...item, current: true } : { ...item, current: false }
+        )
+      );
+/*       console.log(navigation) */
+  }, [location])
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -69,7 +67,7 @@ export default function Header() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <NavLink key={item.name} to={item.href} onClick={() => handleClick(item.name)} className={classNames(
+                      <NavLink key={item.name} to={item.href} className={classNames(
                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                         'rounded-md px-3 py-2 text-sm font-medium')} >
                           {item.name}
@@ -154,7 +152,7 @@ export default function Header() {
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => (
-                <Link key={item.name} to={item.href} onClick={() => handleClick(item.name)} >
+                <Link key={item.name} to={item.href} onClick={() => handleClick} >
                   <Disclosure.Button  className={classNames(
                   item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                   'rounded-md px-3 py-2 text-sm font-medium')}>

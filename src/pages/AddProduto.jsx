@@ -1,9 +1,13 @@
 import { PhotoIcon } from '@heroicons/react/24/solid'
 import Header from '../components/Header'
 import { useProductStore } from '../components/globalStore'
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function AddProduto() {
+
+  const navigate = useNavigate();
 
   const setNomeProduto = useProductStore(state => state.setNomeProduto);
   const setDescricaoProduto = useProductStore(state => state.setDescricaoProduto);
@@ -28,15 +32,19 @@ export default function AddProduto() {
       id: produtos.length,
       nome: nomeProduto,
       descricao: descricaoProduto
+      /* Adicionar preço, é um produto */
     };
 
     setProdutos(produto);
 
     setNomeProduto('');
     setDescricaoProduto('');
-
-    console.log(produtos)
+    navigate('/')
   }
+
+  useEffect(() => {
+    console.log(produtos)
+  }, [produtos])
 
   return (
     <div>
