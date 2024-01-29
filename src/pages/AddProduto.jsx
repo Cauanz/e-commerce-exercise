@@ -1,20 +1,25 @@
 import { PhotoIcon } from '@heroicons/react/24/solid'
 import Header from '../components/Header'
 import { useProductStore } from '../components/globalStore'
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
 export default function AddProduto() {
+
+  //TODO - Adicionar funcionalidade de adicionar imagem
+  //TODO - Talvez usar um banco de dados? talvez fazer login e autenticação? mas dessa vez sem bagunça e prestando atenção no que esta fazendo, não só ctrl+c ctrl+v em código que não sabe oque faz
 
   const navigate = useNavigate();
 
   const setNomeProduto = useProductStore(state => state.setNomeProduto);
   const setDescricaoProduto = useProductStore(state => state.setDescricaoProduto);
   const setProdutos = useProductStore(state => state.setProdutos);
+  const setPrecoProduto = useProductStore(state => state.setPrecoProduto);
   
+  //TODO - Talvez passar a criação e adição do objeto produto direto na store do Zustand sem precisar importar os 4 states para cá e enviar o objeto
   const nomeProduto = useProductStore(state => state.nomeProduto);
   const descricaoProduto = useProductStore(state => state.descricaoProduto);
+  const precoProduto = useProductStore(state => state.precoProduto);
   const produtos = useProductStore(state => state.produtos);
 
   const handleNomeChange = (e) => {
@@ -25,14 +30,18 @@ export default function AddProduto() {
     setDescricaoProduto(e.target.value)
   };
 
+  const handlePrecoChange = (e) => {
+    setPrecoProduto(e.target.value);
+  }
+
   function handleProduto(e) {
     e.preventDefault();
     
     const produto = {
       id: produtos.length,
       nome: nomeProduto,
-      descricao: descricaoProduto
-      /* Adicionar preço, é um produto */
+      descricao: descricaoProduto,
+      preco: precoProduto
     };
 
     setProdutos(produto);
@@ -41,10 +50,6 @@ export default function AddProduto() {
     setDescricaoProduto('');
     navigate('/')
   }
-
-  useEffect(() => {
-    console.log(produtos)
-  }, [produtos])
 
   return (
     <div>
@@ -55,6 +60,7 @@ export default function AddProduto() {
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
 
+        {/* CAMPO NOME PRODUTO */}
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-4">
               <label htmlFor="productName" className="block text-sm font-medium leading-6 text-gray-900">
@@ -75,6 +81,39 @@ export default function AddProduto() {
               </div>
             </div>
 
+        {/* CAMPO PRECO PRODUTO */}
+            <div>
+              <label htmlFor="price" className="block text-sm font-medium leading-6 text-gray-900">
+                Price
+              </label>
+              <div className="relative mt-2 rounded-md shadow-sm">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <span className="text-gray-500 sm:text-sm">R$</span>
+                </div>
+                <input
+                  type="text"
+                  name="price"
+                  id="price"
+                  className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="0.00"
+                  onChange={handlePrecoChange}
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center">
+                  <label htmlFor="currency" className="sr-only">
+                    Currency
+                  </label>
+                  <select
+                    id="currency"
+                    name="currency"
+                    className="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                  >
+                    <option>BRL</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+        {/* CAMPO DESCRICAO PRODUTO */}
             <div className="col-span-full">
               <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
                 Sobre o produto
@@ -91,6 +130,7 @@ export default function AddProduto() {
               </div>
             </div>
 
+        {/* CAMPO FOTO PRODUTO */}
             <div className="col-span-full">
               <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
                 Foto de capa do produto (opcional)
@@ -116,6 +156,7 @@ export default function AddProduto() {
         </div>
       </div>
 
+        {/* MENU COM CAMPOS DO PRODUTO  PARA MOBILE */}
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
           Cancelar

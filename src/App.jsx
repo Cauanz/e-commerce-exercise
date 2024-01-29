@@ -5,7 +5,7 @@ import Produtos from './components/Produtos';
 
 function App() {
 
-  const produtos = useProductStore(state => state.produtos);
+  /* const produtos = useProductStore(state => state.produtos); */
 
   //Versao antiga usando state, agora usando store do zustando em um arquivo proprio
 /*   const [produtos, setProdutos] = useState([]);
@@ -16,15 +16,6 @@ function App() {
   return (
     <>
       <Header />
-
-    {/* ESSA RENDERIZACAO DE PRODUTOS E PROVISORIA PARA INTUITO DE DEVELOPMENT, NAO TEM NADA A VER COM A VERSAO FINAL QUE INCLUE UM COMPONENTE CARD */}
-{/*     {produtos.map((produto, index) => (
-        <div key={index}>
-          <h2>{produto.nome}</h2>
-          <p>{produto.descricao}</p>
-        </div>
-      ))} */}
-
       <Produtos />
     </>
   )

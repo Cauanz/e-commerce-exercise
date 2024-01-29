@@ -2,7 +2,7 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const initialNavigation = [
   { name: 'Inicio', href: '/', current: true },
@@ -11,9 +11,8 @@ const initialNavigation = [
   { name: 'Adicionar Produto', href: '/Adicionar-Produto', current: false },
 ]
 
-//todo - fazer adicionar produto funcionar - parcialmente funcionando, precisa revisar estados, etc...
-
-//TODO - Fazer pagina de produtos, talvez criar um componente de card para os produtos
+  //TODO - Concertar o menu dropdown mobile no fim do código lá embaixo
+  //TODO - Implementar carrinho
 
 export default function Header() {
 
@@ -25,7 +24,6 @@ export default function Header() {
           item.href === location.pathname ? { ...item, current: true } : { ...item, current: false }
         )
       );
-/*       console.log(navigation) */
   }, [location])
 
   function classNames(...classes) {
@@ -151,7 +149,7 @@ export default function Header() {
               {/* Mobile Dropdown Menu */}
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
+{/*               {navigation.map((item) => (
                 <Link key={item.name} to={item.href} onClick={() => handleClick} >
                   <Disclosure.Button  className={classNames(
                   item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
@@ -159,7 +157,7 @@ export default function Header() {
                         {item.name}
                   </Disclosure.Button>
                 </Link>
-              ))}
+              ))} */}
             </div>
           </Disclosure.Panel>
         </>
