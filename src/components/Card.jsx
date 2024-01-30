@@ -14,6 +14,8 @@ export default function Card({ produto }) {
         </div>
 
         <h5 className="w-full">{produto.descricao}</h5>
+
+        <button className="bg-green-700 rounded-lg text-neutral-50 font-bold">Add to Cart</button> {/* BOTAO IMPROVISADO PARA TESTAR O ADICIONAR AO CARRINHO *DEVELOPMENT PORPUSES* */}
       </div>
     </div>
   )

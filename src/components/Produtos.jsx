@@ -7,10 +7,6 @@ export default function Produtos() {
   /* PEGAR PRODUTOS DO ESTADO */
   const produtos = useProductStore(state => state.produtos);
 
-/*     useEffect(() => {
-    /* RENDERIZAR PRODUTOS, QUANDO CARREGAR TALVEZ NAO PRECISE
-  }, []) */
-
   useEffect(() => {
     console.log(produtos)
   })
