@@ -17,6 +17,7 @@ export default function AddProduto() {
   const setPrecoProduto = useProductStore(state => state.setPrecoProduto);
   
   //TODO - Talvez passar a criação e adição do objeto produto direto na store do Zustand sem precisar importar os 4 states para cá e enviar o objeto
+  
   const nomeProduto = useProductStore(state => state.nomeProduto);
   const descricaoProduto = useProductStore(state => state.descricaoProduto);
   const precoProduto = useProductStore(state => state.precoProduto);

@@ -1,7 +1,13 @@
+import { useProductStore } from "./globalStore"
 
 
 export default function Card({ produto }) {
 
+  const setCarrinho = useProductStore(state => state.setCarrinho);
+
+  const addToCart = () => {
+    setCarrinho(currentCarrinho => [...currentCarrinho, produto])
+  }
 
   return (
     <div className="flex flex-col w-80 h-96">
@@ -15,7 +21,7 @@ export default function Card({ produto }) {
 
         <h5 className="w-full">{produto.descricao}</h5>
 
-        <button className="bg-green-700 rounded-lg text-neutral-50 font-bold">Add to Cart</button> {/* BOTAO IMPROVISADO PARA TESTAR O ADICIONAR AO CARRINHO *DEVELOPMENT PORPUSES* */}
+        <button className="bg-green-700 rounded-lg text-neutral-50 font-bold" onClick={addToCart}>Add to Cart</button> {/* BOTAO IMPROVISADO PARA TESTAR O ADICIONAR AO CARRINHO *DEVELOPMENT PORPUSES* */}
       </div>
     </div>
   )

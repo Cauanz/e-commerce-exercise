@@ -11,8 +11,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Routes>
         <Route path={"/"} element={<App />} />
-        <Route path={"/Adicionar-Produto"} element={<AddProduto />} />
-        <Route path={"/Carrinho"} element={<Carrinho />} />
+        <Route path={"/adicionar-Produto"} element={<AddProduto />} />
+        <Route path={"/carrinho"} element={<Carrinho />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
