@@ -6,7 +6,7 @@ export default function Card({ produto }) {
   const setCarrinho = useProductStore(state => state.setCarrinho);
 
   const addToCart = () => {
-    setCarrinho(currentCarrinho => [...currentCarrinho, produto])
+    setCarrinho(produto)
   }
 
   return (
