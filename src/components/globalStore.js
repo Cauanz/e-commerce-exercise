@@ -19,5 +19,16 @@ export const useProductStore = create(set => ({
       if(produtoExistente) return state;
 
       return { carrinho: [...state.carrinho, produto]}
+   }),
+
+   setProduto: () => set(state => {
+
+      const produto = {
+         id: state.produtos.length,
+         nome: state.nomeProduto,
+         descricao: state.descricaoProduto,
+         preco: state.precoProduto
+      };
+      return { produtos: [...state.produtos, produto], nomeProduto: '', descricaoProduto: '', precoProduto: 0.0 };
    })
 }));

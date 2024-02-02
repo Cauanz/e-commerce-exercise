@@ -12,15 +12,10 @@ export default function AddProduto() {
 
   const setNomeProduto = useProductStore(state => state.setNomeProduto);
   const setDescricaoProduto = useProductStore(state => state.setDescricaoProduto);
-  const setProdutos = useProductStore(state => state.setProdutos);
   const setPrecoProduto = useProductStore(state => state.setPrecoProduto);
+  const setProduto = useProductStore(state => state.setProduto);
   
   //TODO - Talvez passar a criação e adição do objeto produto direto na store do Zustand sem precisar importar os 4 states para cá e enviar o objeto
-  
-  const nomeProduto = useProductStore(state => state.nomeProduto);
-  const descricaoProduto = useProductStore(state => state.descricaoProduto);
-  const precoProduto = useProductStore(state => state.precoProduto);
-  const produtos = useProductStore(state => state.produtos);
 
   const handleNomeChange = (e) => {
     setNomeProduto(e.target.value)
@@ -36,18 +31,7 @@ export default function AddProduto() {
 
   function handleProduto(e) {
     e.preventDefault();
-    
-    const produto = {
-      id: produtos.length,
-      nome: nomeProduto,
-      descricao: descricaoProduto,
-      preco: precoProduto
-    };
-
-    setProdutos(produto);
-
-    setNomeProduto('');
-    setDescricaoProduto('');
+    setProduto();
     navigate('/')
   }
 

@@ -10,8 +10,10 @@ export default function Card({ produto }) {
   }
 
   return (
-    <div className="flex flex-col w-80 h-96">
-      <img src="https://placehold.co/200x200" className="max-w-80" alt="Imagem do produto" /> {/* IMAGEM PARA TESTE REMOVER QUANDO FUNCIONALIDADE DE ADICIONAR IMAGEM FOR IMPLEMENTADA */}
+    /* ESTRUTURA CARD ORIGINAL, NAO APAGAR */
+
+/*     <div className="flex flex-col w-80 h-96">
+      <img src="https://placehold.co/200x200" className="max-w-80" alt="Imagem do produto" /> {/* IMAGEM PARA TESTE REMOVER QUANDO FUNCIONALIDADE DE ADICIONAR IMAGEM FOR IMPLEMENTADA
 
       <div className="content flex flex-col p-1">
         <div className="w-full flex justify-between">
@@ -21,7 +23,24 @@ export default function Card({ produto }) {
 
         <h5 className="w-full">{produto.descricao}</h5>
 
-        <button className="bg-green-700 rounded-lg text-neutral-50 font-bold" onClick={addToCart}>Add to Cart</button> {/* BOTAO IMPROVISADO PARA TESTAR O ADICIONAR AO CARRINHO *DEVELOPMENT PORPUSES* */}
+        <button className="bg-green-700 rounded-lg text-neutral-50 font-bold" onClick={addToCart}>Add to Cart</button> {/* BOTAO IMPROVISADO PARA TESTAR O ADICIONAR AO CARRINHO *DEVELOPMENT PORPUSES* 
+      </div>
+  </div> */
+
+  
+    /* COPIA PARA USO COM PRODUTOS ORIUNDOS DA API */
+    <div className="flex flex-col w-80 h-96">
+      <img src="https://placehold.co/200x200" className="max-w-80" alt="Imagem do produto" />
+
+      <div className="content flex flex-col p-1">
+        <div className="w-full flex justify-between">
+          <h4>{produto.title}</h4>
+          <h4>R$ {produto.price}</h4>
+        </div>
+
+        <h5 className="w-full">{produto.description}</h5>
+
+        <button className="bg-green-700 rounded-lg text-neutral-50 font-bold" onClick={addToCart}>Add to Cart</button>
       </div>
     </div>
   )
