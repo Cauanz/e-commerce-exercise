@@ -9,7 +9,7 @@ export default function Carrinho() {
   const carrinho = useProductStore(state => state.carrinho);
 
   const handleCalculate = (cartItems) => {
-    return cartItems.reduce((total, item) => total + Number(item.preco), 0)
+    return cartItems.reduce((total, item) => total + Number(item.price), 0)
   }
 
   return (

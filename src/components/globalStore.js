@@ -10,7 +10,8 @@ export const useProductStore = create(set => ({
    setNomeProduto: (nome) => set({ nomeProduto: nome}),
    setDescricaoProduto: (descricao) => set({ descricaoProduto: descricao}),
    setPrecoProduto: (preco) => set({precoProduto: preco}),
-   setProdutos: (produto) => set(state => ({ produtos: [...state.produtos, produto]})),
+/*    addProdutos: (produto) => set(state => ({ produtos: [...state.produtos, produto]})), */
+   setProdutos: (produtos) => set({ produtos }),
 
    setCarrinho: (produto) => set(state => {
       
@@ -22,12 +23,11 @@ export const useProductStore = create(set => ({
    }),
 
    setProduto: () => set(state => {
-
       const produto = {
          id: state.produtos.length,
-         nome: state.nomeProduto,
+         title: state.nomeProduto,
          descricao: state.descricaoProduto,
-         preco: state.precoProduto
+         price: state.precoProduto
       };
       return { produtos: [...state.produtos, produto], nomeProduto: '', descricaoProduto: '', precoProduto: 0.0 };
    })

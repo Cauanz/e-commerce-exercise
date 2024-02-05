@@ -11,22 +11,26 @@ export default function Produtos() {
   //SET PRODUTOS SOMENTE PARA USO NO FETCH, INTERFERE DIRETAMENTE NO ARMAZENAMENTO DE PRODUTOS MANUAL
   const setProdutos = useProductStore(state => state.setProdutos);
 
-  //TODO - resolver problema dados da API nao estao exibindo
+  //TODO - resolver problema dados da API sobreescreverem itens criados manualmente
   useEffect(() => {
     const fetch = async () => {
       axios.get('https://fakestoreapi.com/products')
       .then(res => {
-          setProdutos(res.data)
+          /* setProdutos(res.data) */
         })
     }
     fetch();
   }, [])
 
+  useEffect(() => {
+    console.log(produtos)
+  }, [produtos])
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 m-2.5">
-      {produtos.map((produto, index) => (
-        <Card key={index} produto={produto} />
-      ))}
+      {produtos.map((produto) =>
+          <Card key={produto.id} produto={produto} />
+      )}
     </div>
   )
 }

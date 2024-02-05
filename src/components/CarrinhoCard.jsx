@@ -8,12 +8,14 @@ export default function CarrinhoCard({ cartProduto }) {
       <div className="flex">
          <img src="https://placehold.co/100x100" className="w-36" alt="" />
          <div className="flex flex-col mx-3">
-            <p>{cartProduto.nome}</p>
+            <p>{cartProduto.title}</p>
             <p>{cartProduto.descricao}</p>
-            <p>{cartProduto.preco}</p>
+            <p>R$ {cartProduto.price}</p>
          </div>
       </div>
+      //TODO - Concertar card, tamanho, quantidade etc...
       <div className="h-full flex items-center">
+         <p>Quantidade: </p>
          <div className="h-7 flex">
                <label htmlFor="Quantity" className="sr-only">
                Quantity
