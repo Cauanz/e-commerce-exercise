@@ -2,15 +2,28 @@ import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import CarrinhoCard from "./CarrinhoCard";
 import Header from "./Header";
 import { useProductStore } from "./globalStore";
+import { useEffect } from "react";
 
 export default function Carrinho() {
 
-  const produtos = useProductStore(state => state.produtos);
   const carrinho = useProductStore(state => state.carrinho);
 
   const handleCalculate = (cartItems) => {
-    return cartItems.reduce((total, item) => total + Number(item.price), 0)
+    return cartItems.reduce((total, item) => total + Number(item.produto.price), 0)
   }
+
+  const handleQuantity = (e) => {
+      console.log(e.target.value)
+
+  }
+
+  useEffect(() => {
+    console.log(carrinho)
+  }, [carrinho])
+  
+  //TODO - Criar maneira talvez função para calcular o preço do produto de acordo com a quantidade
+  //TODO - Criar maneira de atualizar quantidade no objeto (quantidade é uma string apesar de ser numero)
+
 
   return (
     <div>
@@ -19,8 +32,8 @@ export default function Carrinho() {
       {carrinho.length > 0 ? (
       <div className="flex">
       <div className="w-full md:w-4/5 bg-gray-200 p-4 mr-4 md:mr-0">
-          {produtos.map((produto) => (
-            <CarrinhoCard key={produto.id} cartProduto={produto} />
+          {carrinho.map((produtoInCart) => (
+            <CarrinhoCard key={produtoInCart.id} cartProduto={produtoInCart} handleQuantity={handleQuantity} />
           ))}
       </div>
       <div className="hidden md:block w-1/5 bg-blue-200 p-4">

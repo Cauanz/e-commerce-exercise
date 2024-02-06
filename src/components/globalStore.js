@@ -19,7 +19,24 @@ export const useProductStore = create(set => ({
 
       if(produtoExistente) return state;
 
-      return { carrinho: [...state.carrinho, produto]}
+      const produtoCarrinho = {
+         produto: produto,
+         quantity: "1"
+      }
+
+      return { carrinho: [...state.carrinho, produtoCarrinho]}
+   }),
+
+   setQuantidadeProduto: (idProduto, novaQuantidade) => set(state => {
+
+      const indiceProduto = state.carrinho.findIndex((p) => p.produto.id === idProduto);
+
+      if(indiceProduto === -1) return state;
+      
+      const novoCarrinho = [...state.carrinho];
+      novoCarrinho[indiceProduto].quantity = novaQuantidade;
+
+      return { carrinho: novoCarrinho };
    }),
 
    setProduto: () => set(state => {
