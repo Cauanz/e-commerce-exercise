@@ -39,12 +39,26 @@ export const useProductStore = create(set => ({
       return { carrinho: novoCarrinho };
    }),
 
+   setValorProduto: (idProduto, novaQuantidade) => set(state => {
+
+      const indexProduto = state.carrinho.findIndex((p) => p.produto.id === idProduto);
+
+      if(indexProduto === -1) return state;
+
+      const novoCarrinho = [...state.carrinho];
+      const precoOriginal = parseFloat(novoCarrinho[indexProduto].produto.originalPrice);
+      novoCarrinho[indexProduto].produto.price = (precoOriginal * novaQuantidade).toString();
+
+      return { carrinho: novoCarrinho };
+   }),
+
    setProduto: () => set(state => {
       const produto = {
          id: state.produtos.length,
          title: state.nomeProduto,
          descricao: state.descricaoProduto,
-         price: state.precoProduto
+         price: state.precoProduto,
+         originalPrice: state.precoProduto
       };
       return { produtos: [...state.produtos, produto], nomeProduto: '', descricaoProduto: '', precoProduto: 0.0 };
    })

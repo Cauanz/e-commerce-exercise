@@ -1,13 +1,9 @@
 /* eslint-disable react/prop-types */
 
-import { useProductStore } from "./globalStore"
+export default function CarrinhoCard({ cartProduto, handleQuantity }) {
 
-export default function CarrinhoCard({ cartProduto }) {
 
-   const setQuantidadeProduto = useProductStore(state => state.setQuantidadeProduto);
-   const handleQuantity = (e) => {
-      setQuantidadeProduto(cartProduto.produto.id, e.target.value)
-   }
+
 
    return (
       <div className="grid gap-4 m-2.5 overflow-x-auto w-9/12">
@@ -17,7 +13,7 @@ export default function CarrinhoCard({ cartProduto }) {
          <div className="flex flex-col mx-3">
             <p>{cartProduto.produto.title}</p>
             <p>{cartProduto.produto.descricao}</p>
-            <p>R$ {cartProduto.produto.price}</p>
+            <p>R$ {cartProduto.produto.price} x {cartProduto.quantity}</p>
          </div>
       </div>
       {/* //TODO - Concertar card, tamanho, quantidade etc... */}
@@ -30,7 +26,7 @@ export default function CarrinhoCard({ cartProduto }) {
                <select
                id="Quantity"
                name="Quantity"
-               className="h-full rounded-md border-current border-solid border-2 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm" onChange={handleQuantity}>
+               className="h-full rounded-md border-current border-solid border-2 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm" onChange={(e) => handleQuantity(cartProduto, e)} value={cartProduto.quantity}>
                   Quantity
                <option>1</option>
                <option>2</option>

@@ -34,6 +34,13 @@ export default function Header() {
     setQuantity(carrinho.length)
   }, [carrinho])
 
+
+  const handleCalculate = (cartItems) => {
+    return cartItems.reduce((total, item) => total + Number(item.produto.price), 0)
+  }
+  const total = handleCalculate(carrinho);
+
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -82,11 +89,12 @@ export default function Header() {
                         <NavLink to={"/carrinho"}>
                         <button
                         type="button"
-                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-2.5" >
+                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-2.5 flex" >
 
                           <span className="absolute -inset-1.5" />
-                          <p>{quantity}</p>
                           <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                          <p>{total}</p>
+                          <p className='text-sm ml-0.5'>({quantity})</p>
                         </button>
                         </NavLink>
 
