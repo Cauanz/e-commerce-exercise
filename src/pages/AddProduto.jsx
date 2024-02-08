@@ -5,24 +5,17 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AddProduto() {
 
-  //TODO - Adicionar funcionalidade de adicionar imagem talvez precise de banco de dados, nao quero fazer com localStorage
+  //TODO - Adicionar funcionalidade de adicionar imagem talvez precise de banco de dados, talvez no futuro, sem localStorage
   //TODO - Talvez usar um banco de dados? talvez fazer login e autenticação? mas dessa vez sem bagunça e prestando atenção no que esta fazendo, não só ctrl+c ctrl+v em código que não sabe oque faz
 
   const navigate = useNavigate();
 
   const setNomeProduto = useProductStore(state => state.setNomeProduto);
-  const setDescricaoProduto = useProductStore(state => state.setDescricaoProduto);
   const setPrecoProduto = useProductStore(state => state.setPrecoProduto);
   const setProduto = useProductStore(state => state.setProduto);
-  
-  //TODO - Talvez passar a criação e adição do objeto produto direto na store do Zustand sem precisar importar os 4 states para cá e enviar o objeto
 
   const handleNomeChange = (e) => {
     setNomeProduto(e.target.value)
-  };
-
-  const handleDescricaoChange = (e) => {
-    setDescricaoProduto(e.target.value)
   };
 
   const handlePrecoChange = (e) => {
@@ -94,23 +87,6 @@ export default function AddProduto() {
                     <option>BRL</option>
                   </select>
                 </div>
-              </div>
-            </div>
-
-        {/* CAMPO DESCRICAO PRODUTO */}
-            <div className="col-span-full">
-              <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
-                Sobre o produto
-              </label>
-              <div className="mt-2">
-                <textarea
-                  id="about"
-                  name="about"
-                  rows={3}
-                  className="productDescription block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  defaultValue={''}
-                  onChange={handleDescricaoChange}
-                />
               </div>
             </div>
 

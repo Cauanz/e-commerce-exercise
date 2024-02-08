@@ -8,9 +8,8 @@ export default function Carrinho() {
   //Calcular preco total
   const carrinho = useProductStore(state => state.carrinho);
   const handleCalculate = (cartItems) => {
-    return cartItems.reduce((total, item) => total + Number(item.produto.price), 0)
+    return cartItems.reduce((total, item) => total + Number(item.produto.price), 0).toFixed(2)
   }
-  const total = handleCalculate(carrinho);
 
   //Mudar quantidade no objeto produto e calcular valor baseado na quantidade
   const setQuantidadeProduto = useProductStore(state => state.setQuantidadeProduto);
@@ -24,7 +23,7 @@ export default function Carrinho() {
 
   return (
     <div>
-      <Header total={total}/>
+      <Header/>
 
       {carrinho.length > 0 ? (
       <div className="flex">

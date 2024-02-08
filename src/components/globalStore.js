@@ -1,17 +1,25 @@
 import { create } from 'zustand';
 
-/* ZUSTAND STORE */
+/* ZUSTAND STORE useProductStore */
 export const useProductStore = create(set => ({
    nomeProduto: '',
-   descricaoProduto: '',
    precoProduto: 0.0,
    produtos: [],
    carrinho: [],
    setNomeProduto: (nome) => set({ nomeProduto: nome}),
-   setDescricaoProduto: (descricao) => set({ descricaoProduto: descricao}),
    setPrecoProduto: (preco) => set({precoProduto: preco}),
-/*    addProdutos: (produto) => set(state => ({ produtos: [...state.produtos, produto]})), */
-   setProdutos: (produtos) => set({ produtos }),
+   setProdutos: (produtos) => set(() => { 
+
+      const novoProduto = produtos.map(produto => ({
+         id: produto.id,
+         title: produto.title,
+         price: produto.price,
+         originalPrice: produto.price,
+         image: produto.image
+      }))
+
+      return { produtos: [...novoProduto] }
+   }),
 
    setCarrinho: (produto) => set(state => {
       
@@ -47,7 +55,7 @@ export const useProductStore = create(set => ({
 
       const novoCarrinho = [...state.carrinho];
       const precoOriginal = parseFloat(novoCarrinho[indexProduto].produto.originalPrice);
-      novoCarrinho[indexProduto].produto.price = (precoOriginal * novaQuantidade).toString();
+      novoCarrinho[indexProduto].produto.price = (precoOriginal * novaQuantidade).toFixed(2).toString();
 
       return { carrinho: novoCarrinho };
    }),
@@ -56,10 +64,15 @@ export const useProductStore = create(set => ({
       const produto = {
          id: state.produtos.length,
          title: state.nomeProduto,
-         descricao: state.descricaoProduto,
          price: state.precoProduto,
          originalPrice: state.precoProduto
       };
-      return { produtos: [...state.produtos, produto], nomeProduto: '', descricaoProduto: '', precoProduto: 0.0 };
-   })
+      return { produtos: [...state.produtos, produto], nomeProduto: '', precoProduto: 0.0 };
+   }),
+
+   setRemoverProduto: (idProduto) => set(state => {
+      const novoCarrinho = state.carrinho.filter((p) => p.produto.id !== idProduto);
+
+      return { carrinho: novoCarrinho };
+   }),
 }));

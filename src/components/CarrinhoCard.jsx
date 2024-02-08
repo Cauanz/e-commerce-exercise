@@ -1,22 +1,35 @@
 /* eslint-disable react/prop-types */
+import { useProductStore } from './globalStore'
+
 
 export default function CarrinhoCard({ cartProduto, handleQuantity }) {
 
+   const removerProduto = useProductStore(state => state.setRemoverProduto);
 
-
+   const handleRemoveProduct = (id) => {
+      removerProduto(id)
+   }
 
    return (
       <div className="grid gap-4 m-2.5 overflow-x-auto w-9/12">
       <div className="flex w-full h-full justify-between">
       <div className="flex">
-         <img src="https://placehold.co/100x100" className="w-36" alt="" />
+         <img src={cartProduto.produto.image} className="w-36 max-h-32" alt="" />
          <div className="flex flex-col mx-3">
             <p>{cartProduto.produto.title}</p>
             <p>{cartProduto.produto.descricao}</p>
             <p>R$ {cartProduto.produto.price} x {cartProduto.quantity}</p>
+            <button
+            type="button"
+            className="inline-flex mt-2 w-12 justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-36"
+            onClick={() => handleRemoveProduct(cartProduto.produto.id)}>
+            Remover produto
+            </button>
          </div>
       </div>
-      {/* //TODO - Concertar card, tamanho, quantidade etc... */}
+
+      {/* //TODO - Melhorar card, tamanho, quantidade etc... */}
+
       <div className="h-full flex items-center">
          <p>Quantidade: </p>
          <div className="h-7 flex">
